@@ -1,0 +1,137 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Signup and Login</title>
+</head>
+<body>
+    <h2>Signup</h2>
+    <form id="signupForm">
+        <label for="signupUsername">Username:</label>
+        <input type="text" id="signupUsername" required><br>
+        
+        <label for="signupPassword">Password:</label>
+        <input type="password" id="signupPassword" required><br>
+        
+        <label for="signupGender">Gender:</label>
+        <input type="gender" id="signupGender" required><br>
+
+        <label for="signupDob">Password:</label>
+        <input type="date" id="signupDob" required><br>
+
+        <button type="submit">Signup</button>
+    </form>
+
+    <h2>Login</h2>
+    <form id="loginForm">
+        <label for="loginUsername">Username:</label>
+        <input type="text" id="loginUsername" required><br>
+        
+        <label for="loginPassword">Password:</label>
+        <input type="password" id="loginPassword" required><br>
+        
+        <button type="submit">Login</button>
+    </form>
+
+    <div id="message"></div> -->
+
+
+
+
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Signup and Login</title>
+        <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+    </head>
+    <body class="bg-gray-100 min-h-screen flex items-center justify-center">
+    
+        <div class="w-full max-w-md p-4 bg-white rounded-lg shadow-lg bg-gray-300">
+            <h2 class="text-2xl font-semibold mb-4 text-center">Signup</h2>
+            <form id="signupForm" class="mb-4">
+                <div class="mb-4">
+                    <label for="signupUsername" class="block">Username:</label>
+                    <input type="text" id="signupUsername" required class="w-full px-3 py-2 border rounded-md">
+                </div>
+                
+                <div class="mb-4">
+                    <label for="signupPassword" class="block">Password:</label>
+                    <input type="password" id="signupPassword" required class="w-full px-3 py-2 border rounded-md">
+                </div>
+                
+                <div class="mb-4">
+                    <label for="signupGender" class="block">Gender:</label>
+                    <input type="text" id="signupGender" required class="w-full px-3 py-2 border rounded-md">
+                </div>
+    
+                <div class="mb-4">
+                    <label for="signupDob" class="block">Date of Birth:</label>
+                    <input type="date" id="signupDob" required class="w-full px-3 py-2 border rounded-md">
+                </div>
+    
+                <button type="submit" class="w-full bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600">Signup</button>
+            </form>
+    
+            <h2 class="text-2xl font-semibold mb-4 text-center">Login</h2>
+            <form id="loginForm" class="mb-4">
+                <div class="mb-4">
+                    <label for="loginUsername" class="block">Username:</label>
+                    <input type="text" id="loginUsername" required class="w-full px-3 py-2 border rounded-md">
+                </div>
+                
+                <div class="mb-4">
+                    <label for="loginPassword" class="block">Password:</label>
+                    <input type="password" id="loginPassword" required class="w-full px-3 py-2 border rounded-md">
+                </div>
+    
+                <button type="submit" class="w-full bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600">Login</button>
+            </form>
+    
+            <div id="message" class="text-center text-green-600"></div>
+        </div>
+    
+        
+            
+    <script>
+        // Signup Section
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('signupUsername').value;
+            const password = document.getElementById('signupPassword').value;
+            const gender = document.getElementById('signupGender').value;
+            const dob = document.getElementById('signupDob').value;
+            
+            // Check if user already exists
+            if (localStorage.getItem(username)) {
+                alert('This User is already in existence. Please choose a different username to get started.');
+                return;
+            }
+
+            // Data storage in localStorage
+            localStorage.setItem(username, JSON.stringify({ username, password, gender, dob }));
+            document.getElementById('message').innerHTML = 'Your Signup is successful! You can now proceed to login.';
+        });
+
+        // Login Section
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+
+            // Data Retrieval rom localStorage
+            const user = JSON.parse(localStorage.getItem(username));
+
+            if (user && user.password === password) {
+                document.getElementById('message').innerHTML = 'Login successful!';
+            } else {
+                document.getElementById('message').innerHTML = 'Login failed. Please check your username and password.';
+            }
+        });
+    </script>
+        
+    </body>
+    </html>
+    
+
+
+
